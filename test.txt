@@ -1,6 +1,6 @@
 
 
-print("Loading Vision...")
+print("Loading..")
 
 local VISION_VERSION_NUMBER = "1.0"
 local VISION_VERSION_VNUM = "v" .. VISION_VERSION_NUMBER
