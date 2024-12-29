@@ -2,7 +2,7 @@
 
 print("Loading Vision...")
 
-local VISION_VERSION_NUMBER = "1.0"
+local VISION_VERSION_NUMBER = "1.2"
 local VISION_VERSION_VNUM = "v" .. VISION_VERSION_NUMBER
 local VISION_VERSION_LONG = "version " .. VISION_VERSION_NUMBER
 
@@ -617,9 +617,9 @@ local Lighting = game:GetService("Lighting")
 
 
 local Window = Rayfield:CreateWindow({
-    Name = "Vision " .. VISION_VERSION_VNUM,
-    LoadingTitle = "Vision",
-    LoadingSubtitle = VISION_VERSION_LONG
+    Name = "Vision Universal " .. VISION_VERSION_VNUM,
+    LoadingTitle = "Vision Universal",
+    LoadingSubtitle = "Developed by korp."
 })
 
 
