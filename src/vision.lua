@@ -1,6 +1,6 @@
 
 
-print("Loading..")
+print("Loading Vision...")
 
 local VISION_VERSION_NUMBER = "1.0"
 local VISION_VERSION_VNUM = "v" .. VISION_VERSION_NUMBER
@@ -93,9 +93,9 @@ local Lighting = game:GetService("Lighting")
         if RAGEAIM_ON == false then
             local shortestDistance = math.huge
             local mousePos = UserInputService:GetMouseLocation()
-
+    
             for _, player in pairs(Players:GetPlayers()) do
-                if player ~= localPlayer and player.Character and player.Character:FindFirstChild("Head") then
+                if player ~= localPlayer and player.Character and player.Character:FindFirstChild("Head") and isEnemy(player) then
                     local screenPos, onScreen = camera:WorldToScreenPoint(player.Character.Head.Position)
                     if onScreen then
                         local distance = (Vector2.new(screenPos.X, screenPos.Y) - mousePos).Magnitude
@@ -109,10 +109,10 @@ local Lighting = game:GetService("Lighting")
         else
             local shortestDistance = math.huge
             local localPlayerPosition = localPlayer.Character and localPlayer.Character:FindFirstChild("HumanoidRootPart") and localPlayer.Character.HumanoidRootPart.Position
-
+    
             if localPlayerPosition then
                 for _, player in pairs(Players:GetPlayers()) do
-                    if player ~= localPlayer and player.Character and player.Character:FindFirstChild("HumanoidRootPart") then
+                    if player ~= localPlayer and player.Character and player.Character:FindFirstChild("HumanoidRootPart") and isEnemy(player) then
                         local distance = (player.Character.HumanoidRootPart.Position - localPlayerPosition).Magnitude
                         if distance < shortestDistance then
                             closest = player
@@ -122,10 +122,16 @@ local Lighting = game:GetService("Lighting")
                 end
             end
         end
-
+    
         return closest
     end
-
+    
+    -- Ensure Team Check is always active by default
+    function isEnemy(player)
+        if not player or not player.Team then return true end
+        return player.Team ~= localPlayer.Team
+    end
+    
     function getClosestAlivePlayerIn3DSpace()
         local closest = nil
         local shortestDistance = math.huge
