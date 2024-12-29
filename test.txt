@@ -1,1 +1,8 @@
-test!
+local testContent = "print('Loadstring test works!')"
+local func, loadError = loadstring(testContent)
+
+if func then
+    func()
+else
+    print("loadstring failed:", loadError)
+end
