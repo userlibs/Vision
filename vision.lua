@@ -1,4 +1,4 @@
--- INITIALIZE VERSION NUMBERS
+
 
 print("Loading Vision...")
 
@@ -10,7 +10,6 @@ print("VISION Version: " .. VISION_VERSION_NUMBER)
 print("VISION Version '  ".. VISION_VERSION_VNUM)
 print("VISION Version 'version':   " .. VISION_VERSION_LONG)
 
--- INITIALIZE SERVICES AND LIBRARIES
 
 local Rayfield = loadstring(game:HttpGet('https://sirius.menu/rayfield'))()
 local RunService = game:GetService("RunService")
@@ -19,13 +18,7 @@ local Players = game:GetService("Players")
 local MarketplaceService = game:GetService("MarketplaceService")
 local Lighting = game:GetService("Lighting")
 
--- INITIALIZE VARIABLES
-    -- NAMING CONVENTION
-        -- ALL_CAPITAL = Changeable Setting
-        -- TitleCase   = Non-Changeable Setting
-        -- camelCase   = Non-Setting
 
-     -- GENERAL VARIABLES
     local camera = game.Workspace.CurrentCamera
     local localPlayer = Players.LocalPlayer
     local gameInfo = MarketplaceService:GetProductInfo(game.PlaceId)
@@ -38,7 +31,7 @@ local Lighting = game:GetService("Lighting")
     local humanoidRootPart = localPlayer.Character:WaitForChild("HumanoidRootPart")
     local defaultWalkspeed = humanoid.WalkSpeed
 
-     -- AIMBOT VARIABLES
+     
     local AIMBOT_ON = false
     local AIMBOT_FOV = 150
     local AIMBOT_SMOOTHING = 50
@@ -50,7 +43,6 @@ local Lighting = game:GetService("Lighting")
 
     local RAGEAIM_ON = false
 
-    -- ESP VARIABLES
     local BOX_ESP_COLOR = Color3.fromRGB(255, 255, 255)
     local SKELETON_ESP_COLOR = Color3.fromRGB(255, 255, 255)
     local CHAMS_COLOR = Color3.fromRGB(255, 255, 255)
@@ -67,12 +59,10 @@ local Lighting = game:GetService("Lighting")
     local BOX_TEAM_COLOR = false
     local SKELETON_TEAM_COLOR = false
 
-    -- FLIGHT VARIABLES
     local SFLY_ON = false
     local FLY_ON = false
     local FLY_SPEED = 50
 
-    -- SPINBOT VARIABLES
     local horizSpinConnection
     local horizSpinAngle = 0
 
@@ -80,25 +70,23 @@ local Lighting = game:GetService("Lighting")
     local vertSpinAngle = 0
     local originalY = humanoidRootPart.Position.Y
     
-    -- BHOP VARIABLES
+
     local BHOP_ON = false
 
-    -- RAGDOLL VARIABLES
+ 
     local RAGDOLL_ON = false
 
-    -- WALKSPEED VARIABLES
+
     local IS_MODIFYING = false
     local WALKSPEED = defaultWalkspeed
 
-    -- CAMLOCK VARIABLES
+
     local isLocked = false
     local CAMLOCK_ON = false
 
-    -- COLOR FILTER VARIABLES
     local COLOR_FILTER_COLOR = Color3.fromRGB(255, 0, 255)
     local COLOR_FILTER_INTENSITY = 50
 
--- INITIALIZE FUNCTIONS
 
     function getClosestPlayer()
         local closest = nil
@@ -204,20 +192,20 @@ local Lighting = game:GetService("Lighting")
         if not character then return end
         
         local bones = {
-            createBone(), -- Head to Torso/UpperTorso
-            createBone(), -- Torso/UpperTorso to LowerTorso (R15 only)
-            createBone(), -- Torso/UpperTorso to LeftArm/LeftUpperArm
-            createBone(), -- LeftArm/LeftUpperArm to LeftLowerArm (R15 only)
-            createBone(), -- LeftLowerArm to LeftHand (R15 only)
-            createBone(), -- Torso/UpperTorso to RightArm/RightUpperArm
-            createBone(), -- RightArm/RightUpperArm to RightLowerArm (R15 only)
-            createBone(), -- RightLowerArm to RightHand (R15 only)
-            createBone(), -- Torso/LowerTorso to LeftLeg/LeftUpperLeg
-            createBone(), -- LeftLeg/LeftUpperLeg to LeftLowerLeg (R15 only)
-            createBone(), -- LeftLowerLeg to LeftFoot (R15 only)
-            createBone(), -- Torso/LowerTorso to RightLeg/RightUpperLeg
-            createBone(), -- RightLeg/RightUpperLeg to RightLowerLeg (R15 only)
-            createBone(), -- RightLowerLeg to RightFoot (R15 only)
+            createBone(), 
+            createBone(), 
+            createBone(), 
+            createBone(), 
+            createBone(), 
+            createBone(), 
+            createBone(), 
+            createBone(), 
+            createBone(), 
+            createBone(), 
+            createBone(), 
+            createBone(), 
+            createBone(), 
+            createBone(), 
         }
         
         skeletonDrawings[player] = bones
@@ -261,19 +249,18 @@ local Lighting = game:GetService("Lighting")
                 updateBonePositions(bones[14], character:FindFirstChild("RightLowerLeg"), character:FindFirstChild("RightFoot"))
             else
                 updateBonePositions(bones[1], character:FindFirstChild("Head"), character:FindFirstChild("Torso"))
-                bones[2].Visible = false -- No UpperTorso to LowerTorso for R6
+                bones[2].Visible = false
                 updateBonePositions(bones[3], character:FindFirstChild("Torso"), character:FindFirstChild("Left Arm"))
-                bones[4].Visible = false -- No LeftUpperArm to LeftLowerArm for R6
-                bones[5].Visible = false -- No LeftLowerArm to LeftHand for R6
+                bones[4].Visible = false
+                bones[5].Visible = false
                 updateBonePositions(bones[6], character:FindFirstChild("Torso"), character:FindFirstChild("Right Arm"))
-                bones[7].Visible = false -- No RightUpperArm to RightLowerArm for R6
-                bones[8].Visible = false -- No RightLowerArm to RightHand for R6
+                bones[7].Visible = false
                 updateBonePositions(bones[9], character:FindFirstChild("Torso"), character:FindFirstChild("Left Leg"))
-                bones[10].Visible = false -- No LeftUpperLeg to LeftLowerLeg for R6
-                bones[11].Visible = false -- No LeftLowerLeg to LeftFoot for R6
+                bones[10].Visible = false
+                bones[11].Visible = false
                 updateBonePositions(bones[12], character:FindFirstChild("Torso"), character:FindFirstChild("Right Leg"))
-                bones[13].Visible = false -- No RightUpperLeg to RightLowerLeg for R6
-                bones[14].Visible = false -- No RightLowerLeg to RightFoot for R6
+                bones[13].Visible = false
+                bones[14].Visible = false
             end
             
             for _, bone in ipairs(bones) do
@@ -392,7 +379,7 @@ local Lighting = game:GetService("Lighting")
         createBox(player)
         createHighlight(character)
         
-        local humanoid = character:WaitForChild("Humanoid", 10) -- Wait for the Humanoid to be added, with a timeout of 10 seconds
+        local humanoid = character:WaitForChild("Humanoid", 10)
         if humanoid then
             humanoid.Died:Connect(function()
                 if boxDrawings[player] then
@@ -476,18 +463,15 @@ local Lighting = game:GetService("Lighting")
             SPIN_SPEED = 10
         end
 
-        vertSpinAngle = vertSpinAngle + math.rad(SPIN_SPEED * deltaTime * 60) -- Frame rate independence
+        vertSpinAngle = vertSpinAngle + math.rad(SPIN_SPEED * deltaTime * 60)
         
         local currentPosition = humanoidRootPart.Position
         local lookVector = humanoidRootPart.CFrame.LookVector
         
-        -- Create rotation CFrame
         local rotationCF = CFrame.Angles(vertSpinAngle, 0, 0)
         
-        -- Apply rotation while preserving original height
         local newCFrame = CFrame.new(currentPosition.X, originalY, currentPosition.Z) * rotationCF
         
-        -- Preserve look direction
         newCFrame = newCFrame * CFrame.new(Vector3.new(0, 0, -1), lookVector)
         
         humanoidRootPart.CFrame = newCFrame
@@ -624,15 +608,15 @@ local Lighting = game:GetService("Lighting")
         colorCorrection.TintColor = adjustedColor
         colorCorrection.Parent = Lighting
     end
--- INITIALIZE RAYFIELD
+
 
 local Window = Rayfield:CreateWindow({
-    Name = "VISION " .. VISION_VERSION_VNUM,
-    LoadingTitle = "VISION",
+    Name = "Vision " .. VISION_VERSION_VNUM,
+    LoadingTitle = "Vision",
     LoadingSubtitle = VISION_VERSION_LONG
 })
 
--- TABS
+
 
 local TabInfo = Window:CreateTab("Information", 7733964719)
 local TabAimbot = Window:CreateTab("Aimbot", 7733765307)
@@ -641,16 +625,14 @@ local TabMovement = Window:CreateTab("Movement", 7743870731)
 local TabMisc = Window:CreateTab("Miscellaneous", 7733993147)
 local TabScriptHub = Window:CreateTab("Script Hub", 7733954760)
 
--- ELEMENTS
 
-     -- INFO ELEMENTS
-    TabInfo:CreateParagraph({Title = "VISION Version", Content = VISION_VERSION_NUMBER})
+    TabInfo:CreateParagraph({Title = "Vision Version", Content = VISION_VERSION_NUMBER})
     TabInfo:CreateParagraph({Title = "Executor", Content = identifyexecutor()})
     TabInfo:CreateParagraph({Title = "Game", Content = gameName})
     TabInfo:CreateParagraph({Title = "Game ID", Content = game.placeId})
-    TabInfo:CreateParagraph({Title = "VISION Discord", Content = "discord.gg/kMDWV94sTP"})
+    TabInfo:CreateParagraph({Title = "Vision Discord", Content = "discord.gg/kMDWV94sTP"})
 
-    -- AIMBOT ELEMENTS
+    
     TabAimbot:CreateParagraph({Title = "Instructions", Content = "Use right click to lock on when the target is within the FOV range"})
     TabAimbot:CreateSection("Main")
     TabAimbot:CreateToggle({
@@ -723,7 +705,6 @@ local TabScriptHub = Window:CreateTab("Script Hub", 7733954760)
         end
     })
 
-    -- ESP ELEMENTS
     TabESP:CreateSection("Box ESP")
     TabESP:CreateToggle({
         Name = "Box ESP Enabled",
@@ -811,7 +792,6 @@ local TabScriptHub = Window:CreateTab("Script Hub", 7733954760)
     })
 
 
-    -- MOVEMENT ELEMENTS
     TabMovement:CreateSection("Flight")
     TabMovement:CreateToggle({
         Name = "Fly Enabled",
@@ -957,7 +937,6 @@ local TabScriptHub = Window:CreateTab("Script Hub", 7733954760)
         end,
     })
 
-    -- MISC ELEMENTS
     TabMisc:CreateSection("Ragdoll")
     TabMisc:CreateToggle({
         Name = "Ragdoll",
@@ -1144,7 +1123,7 @@ local TabScriptHub = Window:CreateTab("Script Hub", 7733954760)
         end
     })
 
--- CONNECT FUNCTIONS TO SERVICES
+
 
 local inputBeganConnection
 local inputEndedConnection
@@ -1188,7 +1167,7 @@ local function setupConnections()
     end)
 end
 
--- ESP Connections
+
     Players.PlayerAdded:Connect(onPlayerAdded)
     Players.PlayerRemoving:Connect(onPlayerRemoving)
 
@@ -1210,7 +1189,6 @@ for _, player in ipairs(Players:GetPlayers()) do
     onPlayerAdded(player)
 end
 
--- FINISH LOADING
 print("Vision " .. VISION_VERSION_VNUM .. " loaded!")
 
 Rayfield:Notify({
